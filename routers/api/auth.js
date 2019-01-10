@@ -4,13 +4,6 @@ const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 
-function validationSignIn(user){
-    if(user.lenght === 0 ){
-        return false;
-    }else{
-        return true;
-    }
-}
 router.post('/', (req, res) => {
     const user = {
         username: req.body.username,
