@@ -2,10 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
-// const db_url = 'mongodb://chendatao:Bonjour1941@ds241664.mlab.com:41664/easycommand';
 const db_url = 'mongodb://localhost:27017/easycommand';
 const user = require('./routers/api/user');
-
+const auth = require('./routers/api/auth');
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -20,6 +19,6 @@ mongoose
     .catch(err => console.log(err));
 
 app.use('/api/user',user);
-
+app.use('/api/auth',auth);
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log('server started at ' + port));
