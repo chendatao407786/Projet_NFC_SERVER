@@ -17,7 +17,11 @@ router.post('/', (req, res) => {
         .then((user) => {
             if (user.length != 0) {
                 const token = jwt.sign({ user }, config.jwtSecret);
-                res.json({ token });
+                res.json({ 
+                    username:user.username,
+                    email:user.email,
+                    token:token 
+                });
             } else {
                 res.status(401).send("Username or password incorrect");
             }
