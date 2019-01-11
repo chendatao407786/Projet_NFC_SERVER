@@ -10,13 +10,14 @@ router.post('/', (req, res) => {
         password: req.body.password
     }
     User
-        .find({
+        .findOne({
             username: user.username,
             password: user.password
         })
         .then((user) => {
             if (user.length != 0) {
                 const token = jwt.sign({ user }, config.jwtSecret);
+                console.log(user);
                 res.json({ 
                     username:user.username,
                     email:user.email,
