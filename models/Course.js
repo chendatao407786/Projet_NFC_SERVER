@@ -9,6 +9,10 @@ const courseSchema = new Schema({
         type:String,
         required:true
     },
+    coursePrice:{
+        type:number,
+        required:true,
+    },
     courseCategory:{
         type:String,
         required:true
