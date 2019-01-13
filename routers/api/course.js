@@ -14,11 +14,12 @@ router.get('/', (req, res) => {
 })
 router.post('/', (req, res) => {
     const newCourse = new Course({
-        courseNameLoc: req.body.courseName,
+        courseNameLoc: req.body.courseNameLoc,
         courseNameEn:req.body.courseNameEn,
+        coursePrice:req.body.coursePrice,
         courseCategory: req.body.courseCategory
     });
-    newCourse.save().then(() => {
+    newCourse.save().then(course => {
         res.json("course created successfully");
     });
     Menu.findByIdAndUpdate(
