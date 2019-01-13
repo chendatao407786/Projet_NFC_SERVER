@@ -10,14 +10,12 @@ const courseSchema = new Schema({
         required:true
     },
     coursePrice:{
-        type:number,
+        type:Number,
         required:true,
     },
     courseCategory:{
         type:String,
         required:true
     }
-    
-
 })
 module.exports = Course = mongoose.model('Course', courseSchema);
