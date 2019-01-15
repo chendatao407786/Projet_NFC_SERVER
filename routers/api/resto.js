@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Restaurant = require('../../models/Restaurant');
+const Menu = require('../../models/Menu');
+const Course = require('../../models/Course');
 
 router.get('/', (req, res) => {
     Restaurant
@@ -12,6 +14,26 @@ router.get('/', (req, res) => {
             res.json(e);
         })
 })
+router.get('/menu/:id', (req, res) => {
+    Restaurant
+        .findById(req.params.id)
+        .then(restaurant => {
+            Menu
+                .findById(restaurant.restaurantMenu)
+                .then(menu => {
+                    Course
+                        .find({
+                            '_id': {
+                                $in: menu.courses
+                            }
+                        })
+                        .then(courses=>{
+                            res.json(courses)
+                        })
+
+                })
+        })
+})
 router.post('/', (req, res) => {
     const newRestaurant = new Restaurant({
         restaurantName: req.body.restaurantName,
@@ -19,7 +41,7 @@ router.post('/', (req, res) => {
         restaurantTelephone: req.body.restaurantTelephone
     });
     newRestaurant.save().then(restaurant => {
-        res.json("Sign up successfully"+restaurant.restaurantName);
+        res.json("Sign up successfully" + restaurant.restaurantName);
     });
 });
 module.exports = router;
