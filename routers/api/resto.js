@@ -22,12 +22,22 @@ router.get('/menu/:id', (req, res) => {
                 .findById(restaurant.restaurantMenu)
                 .then(menu => {
                     Course
-                        .find({
-                            '_id': {
-                                $in: menu.courses
+                        .aggregate([
+                            { $match: { '_id': { $in: menu.courses } } },
+                            {
+                                $group: {
+                                    _id: "$courseCategory",
+                                    courses: {
+                                        $push: {
+                                            "courseNameLoc": "$courseNameLoc",
+                                            "courseNameEn": "$courseNameEn",
+                                            "coursePrice": "$coursePrice"
+                                        }
+                                    }
+                                }
                             }
-                        })
-                        .then(courses=>{
+                        ])
+                        .then(courses => {
                             res.json(courses)
                         })
 
