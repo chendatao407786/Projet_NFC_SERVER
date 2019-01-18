@@ -17,7 +17,8 @@ router.post('/', (req, res) => {
         courseNameLoc: req.body.courseNameLoc,
         courseNameEn:req.body.courseNameEn,
         coursePrice:req.body.coursePrice,
-        courseCategory: req.body.courseCategory
+        courseCategory: req.body.courseCategory,
+        image:req.body.image
     });
     newCourse.save().then(course => {
         res.json("course created successfully");
