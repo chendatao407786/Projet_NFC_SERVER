@@ -31,7 +31,8 @@ router.get('/menu/:id', (req, res) => {
                                         $push: {
                                             "courseNameLoc": "$courseNameLoc",
                                             "courseNameEn": "$courseNameEn",
-                                            "coursePrice": "$coursePrice"
+                                            "coursePrice": "$coursePrice",
+                                            "image":"$image"
                                         }
                                     }
                                 }
