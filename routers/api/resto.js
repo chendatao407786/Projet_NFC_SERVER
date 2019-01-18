@@ -15,9 +15,14 @@ router.get('/', (req, res) => {
         })
 })
 router.get('/menu/:id', (req, res) => {
+    let restaurantMenu = {
+        // "restoName":"",
+        // "courses":[],
+    };
     Restaurant
         .findById(req.params.id)
         .then(restaurant => {
+            restaurantMenu['restoName'] = restaurant.restaurantName;
             Menu
                 .findById(restaurant.restaurantMenu)
                 .then(menu => {
@@ -39,7 +44,8 @@ router.get('/menu/:id', (req, res) => {
                             }
                         ])
                         .then(courses => {
-                            res.json(courses)
+                            restaurantMenu['menu'] = courses;
+                            res.json(restaurantMenu)
                         })
 
                 })
