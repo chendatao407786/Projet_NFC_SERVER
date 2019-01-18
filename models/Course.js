@@ -16,6 +16,10 @@ const courseSchema = new Schema({
     courseCategory:{
         type:String,
         required:true
+    },
+    image:{
+        type:String,
+        required:true
     }
 })
 module.exports = Course = mongoose.model('Course', courseSchema);
