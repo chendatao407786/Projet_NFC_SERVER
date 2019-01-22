@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
             password: user.password
         })
         .then((user) => {
-            if (user.length != 0) {
+            if (user != null) {
                 const token = jwt.sign({ user }, config.jwtSecret);
                 console.log(user);
                 res.json({ 
